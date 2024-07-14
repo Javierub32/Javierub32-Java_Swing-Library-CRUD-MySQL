@@ -1,6 +1,5 @@
 package org.javierub.library;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,14 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import javax.swing.JPanel;
-import org.javierub.views.Books;
-import org.javierub.views.Lendings;
-import org.javierub.views.Principal;
-import org.javierub.views.Reports;
-import org.javierub.views.Returns;
-import org.javierub.views.UpBooks;
-import org.javierub.views.UpUsers;
-import org.javierub.views.Users;
+import org.javierub.views.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

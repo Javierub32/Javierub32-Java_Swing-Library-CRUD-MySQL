@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.javierub.library"},{"l":"org.javierub.main"},{"l":"org.javierub.views"}];updateSearchResults();
