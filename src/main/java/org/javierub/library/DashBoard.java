@@ -8,7 +8,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import javax.swing.JPanel;
+import org.javierub.views.Books;
+import org.javierub.views.Lendings;
 import org.javierub.views.Principal;
+import org.javierub.views.Reports;
+import org.javierub.views.Returns;
+import org.javierub.views.UpBooks;
+import org.javierub.views.UpUsers;
+import org.javierub.views.Users;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -96,6 +103,7 @@ public class DashBoard extends javax.swing.JFrame {
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setMinimumSize(new java.awt.Dimension(738, 429));
         background.setPreferredSize(new java.awt.Dimension(1020, 640));
+        background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         menu.setBackground(new java.awt.Color(13, 71, 161));
         menu.setPreferredSize(new java.awt.Dimension(270, 640));
@@ -120,6 +128,11 @@ public class DashBoard extends javax.swing.JFrame {
         btn_reportes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_reportes.setIconTextGap(15);
         btn_reportes.setMargin(new java.awt.Insets(0, 14, 0, 14));
+        btn_reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_reportesActionPerformed(evt);
+            }
+        });
 
         btn_principal.setBackground(new java.awt.Color(21, 101, 192));
         btn_principal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -132,6 +145,11 @@ public class DashBoard extends javax.swing.JFrame {
         btn_principal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_principal.setIconTextGap(15);
         btn_principal.setMargin(new java.awt.Insets(0, 14, 0, 14));
+        btn_principal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_principalActionPerformed(evt);
+            }
+        });
 
         btn_prestamos.setBackground(new java.awt.Color(21, 101, 192));
         btn_prestamos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -144,6 +162,11 @@ public class DashBoard extends javax.swing.JFrame {
         btn_prestamos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_prestamos.setIconTextGap(15);
         btn_prestamos.setMargin(new java.awt.Insets(0, 14, 0, 14));
+        btn_prestamos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_prestamosActionPerformed(evt);
+            }
+        });
 
         btn_devoluciones.setBackground(new java.awt.Color(21, 101, 192));
         btn_devoluciones.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -156,6 +179,11 @@ public class DashBoard extends javax.swing.JFrame {
         btn_devoluciones.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_devoluciones.setIconTextGap(15);
         btn_devoluciones.setMargin(new java.awt.Insets(0, 14, 0, 14));
+        btn_devoluciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_devolucionesActionPerformed(evt);
+            }
+        });
 
         btn_usuarios.setBackground(new java.awt.Color(21, 101, 192));
         btn_usuarios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -168,6 +196,11 @@ public class DashBoard extends javax.swing.JFrame {
         btn_usuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_usuarios.setIconTextGap(15);
         btn_usuarios.setMargin(new java.awt.Insets(0, 14, 0, 14));
+        btn_usuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_usuariosActionPerformed(evt);
+            }
+        });
 
         btn_libros.setBackground(new java.awt.Color(21, 101, 192));
         btn_libros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -180,6 +213,11 @@ public class DashBoard extends javax.swing.JFrame {
         btn_libros.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_libros.setIconTextGap(15);
         btn_libros.setMargin(new java.awt.Insets(0, 14, 0, 14));
+        btn_libros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_librosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
@@ -217,6 +255,8 @@ public class DashBoard extends javax.swing.JFrame {
                 .addComponent(btn_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        background.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 680));
+
         header.setBackground(new java.awt.Color(25, 118, 210));
         header.setPreferredSize(new java.awt.Dimension(750, 150));
 
@@ -250,6 +290,8 @@ public class DashBoard extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
+        background.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 49, 790, -1));
+
         content.setBackground(new java.awt.Color(204, 204, 255));
         content.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         content.setPreferredSize(new java.awt.Dimension(778, 469));
@@ -266,37 +308,10 @@ public class DashBoard extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        message.setText("Buenos días!");
+        background.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 780, 480));
 
-        javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
-        background.setLayout(backgroundLayout);
-        backgroundLayout.setHorizontalGroup(
-            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backgroundLayout.createSequentialGroup()
-                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
-                    .addGroup(backgroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
-        );
-        backgroundLayout.setVerticalGroup(
-            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
-            .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        message.setText("Buenos días!");
+        background.add(message, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 15, 169, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -312,6 +327,30 @@ public class DashBoard extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_principalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_principalActionPerformed
+        showJPanel(new Principal());
+    }//GEN-LAST:event_btn_principalActionPerformed
+
+    private void btn_prestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_prestamosActionPerformed
+        showJPanel(new Lendings());
+    }//GEN-LAST:event_btn_prestamosActionPerformed
+
+    private void btn_devolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_devolucionesActionPerformed
+        showJPanel(new Returns());
+    }//GEN-LAST:event_btn_devolucionesActionPerformed
+
+    private void btn_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosActionPerformed
+        showJPanel(new Users());
+    }//GEN-LAST:event_btn_usuariosActionPerformed
+
+    private void btn_librosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_librosActionPerformed
+        showJPanel(new Books());
+    }//GEN-LAST:event_btn_librosActionPerformed
+
+    private void btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportesActionPerformed
+        showJPanel(new Reports());
+    }//GEN-LAST:event_btn_reportesActionPerformed
 
     /**
      * @param args the command line arguments
