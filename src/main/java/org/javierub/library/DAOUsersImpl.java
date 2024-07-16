@@ -5,6 +5,8 @@ import org.javierub.interfaces.DAOUsers;
 import org.javierub.models.Users;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOUsersImpl extends Database implements DAOUsers {
@@ -39,7 +41,33 @@ public class DAOUsersImpl extends Database implements DAOUsers {
     }
 
     @Override
-    public List<Users> select(Users user) throws Exception {
-        return List.of();
+    public List<Users> select() throws Exception {
+        List<Users> lista = null;
+        try {
+            this.conectar();
+            PreparedStatement st = this.connection.prepareStatement("SELECT * FROM users;");
+
+            lista = new ArrayList();
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                Users user = new Users();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setLast_name_p(rs.getString("last_name_p"));
+                user.setLast_name_m(rs.getString("last_name_m"));
+                user.setDomicilio(rs.getString("domicilio"));
+                user.setTelefono(rs.getString("tel"));
+                user.setSanctions(rs.getInt("sanctions"));
+                user.setSanc_money(rs.getInt("sanc_money"));
+                lista.add(user);
+            }
+            rs.close();
+            st.close();
+        } catch(Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return lista;
     }
 }

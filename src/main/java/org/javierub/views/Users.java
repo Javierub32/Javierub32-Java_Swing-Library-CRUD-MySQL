@@ -2,8 +2,12 @@ package org.javierub.views;
 
 
 import java.awt.Color;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import org.javierub.db.Database;
+import org.javierub.library.DAOUsersImpl;
 import org.javierub.library.DashBoard;
 
 public class Users extends javax.swing.JPanel {
@@ -11,6 +15,7 @@ public class Users extends javax.swing.JPanel {
     public Users() {
         initComponents();
         InitStyles();
+        LoadUsers();
         
     }
 
@@ -18,6 +23,28 @@ public class Users extends javax.swing.JPanel {
         title.putClientProperty("FlatLaf.styleClass", "h1");
         title.setForeground(Color.black);
         userSearch.putClientProperty("JTextField.placeholderText", "Ingrese el nombre de usuario a buscar.");
+    }
+
+    private void LoadUsers() {
+        try {
+            DAOUsersImpl dao = new DAOUsersImpl();
+            List<org.javierub.models.Users> usersList = dao.select();
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+            for(org.javierub.models.Users user : usersList) {
+                Vector<Object> row = new Vector<>();
+                row.add(user.getId());
+                row.add(user.getName());
+                row.add(user.getLast_name_p());
+                row.add(user.getLast_name_m());
+                row.add(user.getDomicilio());
+                row.add(user.getTelefono());
+
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
    

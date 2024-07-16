@@ -228,6 +228,7 @@ public class UpUsers extends javax.swing.JPanel {
         try{
             DAOUsersImpl dao = new DAOUsersImpl();
             dao.insert(user);
+
             javax.swing.JOptionPane.showMessageDialog(this, "El usuario se registró correctamente.\n", "AVISO", JOptionPane.INFORMATION_MESSAGE);
 
             nameTxt.setText("");
