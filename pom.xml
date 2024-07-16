@@ -33,6 +33,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
-        <exec.mainClass>org.javierub.main.main</exec.mainClass>
+        <exec.mainClass>org.javierub.library.Main</exec.mainClass>
     </properties>
 </project>

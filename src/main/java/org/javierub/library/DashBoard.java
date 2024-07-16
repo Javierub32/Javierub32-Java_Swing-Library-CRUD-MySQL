@@ -53,7 +53,7 @@ public class DashBoard extends javax.swing.JFrame {
         showJPanel(new Principal());
     }
     
-    private void showJPanel(JPanel p){
+    public static void showJPanel(JPanel p){
         content.setLayout(new BorderLayout()); //Me pone el tamaño automaticamente
         
         content.removeAll();
@@ -89,7 +89,6 @@ public class DashBoard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1060, 680));
-        setPreferredSize(new java.awt.Dimension(1060, 680));
         setResizable(false);
 
         background.setBackground(new java.awt.Color(255, 255, 255));
@@ -388,7 +387,7 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JButton btn_principal;
     private javax.swing.JButton btn_reportes;
     private javax.swing.JButton btn_usuarios;
-    private javax.swing.JPanel content;
+    private static javax.swing.JPanel content;
     private javax.swing.JLabel dateText;
     private javax.swing.JPanel header;
     private javax.swing.JSeparator jSeparator1;

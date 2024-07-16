@@ -25,7 +25,7 @@ public class Database {
                 connection = DriverManager.getConnection(JDBC_URL, USER, PASS);
 
                 // Si la conexión es exitosa, imprime un mensaje
-                System.out.println(JDBC_DRIVER);
+                System.out.println("Conexión exitosa a la base de datos.");
             } catch (ClassNotFoundException e) {
                 System.out.println("No se pudo encontrar el driver JDBC.");
                 e.printStackTrace();

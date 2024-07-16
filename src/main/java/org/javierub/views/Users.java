@@ -3,6 +3,8 @@ package org.javierub.views;
 
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
+import org.javierub.db.Database;
+import org.javierub.library.DashBoard;
 
 public class Users extends javax.swing.JPanel {
 
@@ -194,7 +196,7 @@ public class Users extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MousePressed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        
+        DashBoard.showJPanel(new UpUsers());
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed

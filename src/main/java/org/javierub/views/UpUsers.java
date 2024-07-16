@@ -1,6 +1,9 @@
 package org.javierub.views;
 
 
+import org.javierub.library.DAOUsersImpl;
+
+import javax.swing.*;
 import java.awt.Color;
 
 public class UpUsers extends javax.swing.JPanel {
@@ -16,18 +19,14 @@ public class UpUsers extends javax.swing.JPanel {
     private void InitStyles() {
         title.putClientProperty("FlatLaf.styleClass", "h1");
         title.setForeground(Color.black);
+
         nameTxt.putClientProperty("JTextField.placeholderText", "Ingrese el nombre del usuario.");
         apPTxt.putClientProperty("JTextField.placeholderText", "Ingrese el apellido paterno del usuario.");
         apMTxt.putClientProperty("JTextField.placeholderText", "Ingrese el apellido materno del usuario.");
-        domTxt.putClientProperty("JTextField.placeholderText", "Ingrese el domicilio del usuario.");
+        mailTxt.putClientProperty("JTextField.placeholderText", "Ingrese el correo del usuario.");
         phoneTxt.putClientProperty("JTextField.placeholderText", "Ingrese el teléfono del usuario.");
 
-        if (isEdition) {
-            title.setText("Editar Usuario");
-            button.setText("Guardar");
 
-            
-        }
     }
 
     /**
@@ -48,9 +47,9 @@ public class UpUsers extends javax.swing.JPanel {
         apMLbl = new javax.swing.JLabel();
         apMTxt = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        domLbl = new javax.swing.JLabel();
-        domTxt = new javax.swing.JTextField();
-        button = new javax.swing.JButton();
+        mailLbl = new javax.swing.JLabel();
+        mailTxt = new javax.swing.JTextField();
+        btn_register = new javax.swing.JButton();
         phoneLbl = new javax.swing.JLabel();
         phoneTxt = new javax.swing.JTextField();
 
@@ -72,19 +71,19 @@ public class UpUsers extends javax.swing.JPanel {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator1.setPreferredSize(new java.awt.Dimension(200, 10));
 
-        domLbl.setText("Domicilio");
+        mailLbl.setText("Correo");
 
-        domTxt.setToolTipText("");
+        mailTxt.setToolTipText("");
 
-        button.setBackground(new java.awt.Color(18, 90, 173));
-        button.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        button.setForeground(new java.awt.Color(255, 255, 255));
-        button.setText("Registrar");
-        button.setBorderPainted(false);
-        button.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        button.addActionListener(new java.awt.event.ActionListener() {
+        btn_register.setBackground(new java.awt.Color(18, 90, 173));
+        btn_register.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_register.setForeground(new java.awt.Color(255, 255, 255));
+        btn_register.setText("Registrar");
+        btn_register.setBorderPainted(false);
+        btn_register.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonActionPerformed(evt);
+                btn_registerActionPerformed(evt);
             }
         });
 
@@ -119,9 +118,9 @@ public class UpUsers extends javax.swing.JPanel {
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addGap(70, 70, 70)
                                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(domTxt)
+                                    .addComponent(mailTxt)
                                     .addGroup(bgLayout.createSequentialGroup()
-                                        .addComponent(domLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(mailLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(220, 220, 220))
                                     .addComponent(phoneTxt)
                                     .addGroup(bgLayout.createSequentialGroup()
@@ -130,11 +129,11 @@ public class UpUsers extends javax.swing.JPanel {
                                 .addGap(72, 72, 72))
                             .addGroup(bgLayout.createSequentialGroup()
                                 .addGap(93, 93, 93)
-                                .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(553, 553, 553))))
+                        .addGap(494, 494, 494))))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,15 +158,15 @@ public class UpUsers extends javax.swing.JPanel {
                                 .addComponent(apMTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6))
                             .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(domLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(mailLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(domTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(phoneLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
-                                .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(164, 164, 164))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -179,23 +178,68 @@ public class UpUsers extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 710, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 408, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActionPerformed
-        
-    }//GEN-LAST:event_buttonActionPerformed
 
+    private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
+        //! Lo hago así porque tengo dos clases que se llaman Users.
+        org.javierub.models.Users user = new org.javierub.models.Users();
+        String name = nameTxt.getText();
+        String surname_daddy = apPTxt.getText();
+        String surname_mommy = apMTxt.getText();
+        String address = mailTxt.getText();
+        String phone = phoneTxt.getText();
+
+        if(name.isEmpty() || surname_daddy.isEmpty() || surname_mommy.isEmpty() || address.isEmpty() || phone.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos.\n", "AVISO", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if(!esCorreoValido(address)){
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, introduzca el correo correctamente.\n", "AVISO", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if(!esTelefonoValido(phone) ){
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, introduzca el número correctamente.\n", "AVISO", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        user.setName(name);
+        user.setLast_name_p(surname_daddy);
+        user.setLast_name_m(surname_mommy);
+        user.setDomicilio(address);
+        user.setTelefono(phone);
+
+        try{
+            DAOUsersImpl dao = new DAOUsersImpl();
+            dao.insert(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_registerActionPerformed
+
+    public boolean esCorreoValido(String correo) {
+        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return correo.matches(regex);
+    }
+
+    public boolean esTelefonoValido(String telefono) {
+        // Esta expresión regular permite paréntesis, espacios, guiones y puntos, y espera entre 7 a 15 dígitos.
+        String regex = "^\\+?([0-9]{1,3})?[-.\\s]?\\(?([0-9]{2,3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{2,4})[-.\\s]?([0-9]{2,4})$";
+        return telefono.matches(regex);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apMLbl;
@@ -203,10 +247,10 @@ public class UpUsers extends javax.swing.JPanel {
     private javax.swing.JLabel apPLbl;
     private javax.swing.JTextField apPTxt;
     private javax.swing.JPanel bg;
-    private javax.swing.JButton button;
-    private javax.swing.JLabel domLbl;
-    private javax.swing.JTextField domTxt;
+    private javax.swing.JButton btn_register;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel mailLbl;
+    private javax.swing.JTextField mailTxt;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JLabel phoneLbl;

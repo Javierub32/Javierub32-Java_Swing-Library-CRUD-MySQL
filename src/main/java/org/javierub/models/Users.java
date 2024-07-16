@@ -6,7 +6,6 @@ public class Users {
     private String last_name_p;
     private String last_name_m;
     private String domicilio;
-    private String email;
     private String telefono;
     private int sanctions;
     private int sanc_money;
@@ -49,14 +48,6 @@ public class Users {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getTelefono() {
