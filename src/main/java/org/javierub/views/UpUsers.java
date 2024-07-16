@@ -203,16 +203,19 @@ public class UpUsers extends javax.swing.JPanel {
 
         if(name.isEmpty() || surname_daddy.isEmpty() || surname_mommy.isEmpty() || address.isEmpty() || phone.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos.\n", "AVISO", JOptionPane.WARNING_MESSAGE);
+            nameTxt.requestFocus(); // Pone el foco en el campo de texto.
             return;
         }
 
         if(!esCorreoValido(address)){
             javax.swing.JOptionPane.showMessageDialog(this, "Por favor, introduzca el correo correctamente.\n", "AVISO", JOptionPane.WARNING_MESSAGE);
+            mailTxt.requestFocus(); // Pone el foco en el campo de texto.
             return;
         }
 
         if(!esTelefonoValido(phone) ){
             javax.swing.JOptionPane.showMessageDialog(this, "Por favor, introduzca el número correctamente.\n", "AVISO", JOptionPane.WARNING_MESSAGE);
+            phoneTxt.requestFocus();
             return;
         }
 
@@ -225,19 +228,27 @@ public class UpUsers extends javax.swing.JPanel {
         try{
             DAOUsersImpl dao = new DAOUsersImpl();
             dao.insert(user);
+            javax.swing.JOptionPane.showMessageDialog(this, "El usuario se registró correctamente.\n", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+
+            nameTxt.setText("");
+            apPTxt.setText("");
+            apMTxt.setText("");
+            mailTxt.setText("");
+            phoneTxt.setText("");
         } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ocurrió un error al registrar al usuario, inténtelo de nuevo más tarde.\n", "AVISO", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }//GEN-LAST:event_btn_registerActionPerformed
 
     public boolean esCorreoValido(String correo) {
-        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"; // Expresión regular para validar correos electrónicos.
         return correo.matches(regex);
     }
 
     public boolean esTelefonoValido(String telefono) {
         // Esta expresión regular permite paréntesis, espacios, guiones y puntos, y espera entre 7 a 15 dígitos.
-        String regex = "^\\+?([0-9]{1,3})?[-.\\s]?\\(?([0-9]{2,3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{2,4})[-.\\s]?([0-9]{2,4})$";
+        String regex = "^\\+?([0-9]{1,3})?[-.\\s]?\\(?([0-9]{2,3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{2,4})[-.\\s]?([0-9]{2,4})$"; // Expresión regular para validar números telefónicos.
         return telefono.matches(regex);
     }
 
