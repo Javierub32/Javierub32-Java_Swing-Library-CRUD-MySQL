@@ -7,6 +7,7 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import org.javierub.db.Database;
+import org.javierub.interfaces.DAOUsers;
 import org.javierub.library.DAOUsersImpl;
 import org.javierub.library.DashBoard;
 
@@ -28,7 +29,7 @@ public class Users extends javax.swing.JPanel {
     private void LoadUsers() {
         try {
             DAOUsersImpl dao = new DAOUsersImpl();
-            List<org.javierub.models.Users> usersList = dao.select();
+            List<org.javierub.models.Users> usersList = dao.select("");
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
             for(org.javierub.models.Users user : usersList) {
@@ -227,15 +228,65 @@ public class Users extends javax.swing.JPanel {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        
+        DAOUsers dao = new DAOUsersImpl();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int[] selectedRows = jTable1.getSelectedRows();
+
+        if (selectedRows.length < 1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Debes seleccionar uno o más usuarios a eliminar.\n", "AVISO", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Iterar de atrás hacia adelante para evitar problemas con los índices al eliminar
+            for (int i = selectedRows.length - 1; i >= 0; i--) {
+                int rowIndex = selectedRows[i];
+                int userId = (int) model.getValueAt(rowIndex, 0); // Asumiendo que el ID está en la columna 0
+                try {
+                    dao.delete(userId);
+                    model.removeRow(rowIndex);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        
+        DAOUsersImpl dao = new DAOUsersImpl();
+        org.javierub.models.Users user;
+
+        if(jTable1.getSelectedRow() > -1) {
+            int userId = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+            try{
+                user = dao.selectById(userId);
+                DashBoard.showJPanel(new UpUsers(user));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            //JOptionPane.showMessageDialog(null, "Seleccione un usuario para editar.");
+        }
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        
+        try {
+            DAOUsersImpl dao = new DAOUsersImpl();
+            List<org.javierub.models.Users> usersList = dao.select(userSearch.getText());
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+
+            for(org.javierub.models.Users user : usersList) {
+                Vector<Object> row = new Vector<>();
+                row.add(user.getId());
+                row.add(user.getName());
+                row.add(user.getLast_name_p());
+                row.add(user.getLast_name_m());
+                row.add(user.getDomicilio());
+                row.add(user.getTelefono());
+
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
 

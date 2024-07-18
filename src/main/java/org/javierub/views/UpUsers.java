@@ -2,16 +2,25 @@ package org.javierub.views;
 
 
 import org.javierub.library.DAOUsersImpl;
+import org.javierub.library.DashBoard;
+import org.javierub.models.Users;
 
 import javax.swing.*;
 import java.awt.Color;
 
 public class UpUsers extends javax.swing.JPanel {
-
     boolean isEdition = false;
+    Users userEdited = null;
 
     public UpUsers() {
         initComponents();
+        InitStyles();
+    }
+
+    public UpUsers(Users userEdited) {
+        initComponents();
+        isEdition = true;
+        this.userEdited = userEdited;
         InitStyles();
     }
 
@@ -26,6 +35,18 @@ public class UpUsers extends javax.swing.JPanel {
         mailTxt.putClientProperty("JTextField.placeholderText", "Ingrese el correo del usuario.");
         phoneTxt.putClientProperty("JTextField.placeholderText", "Ingrese el teléfono del usuario.");
 
+        if (isEdition) {
+            title.setText("Editar Usuario");
+            btn_register.setText("Guardar");
+
+            if (userEdited != null) {
+                nameTxt.setText(userEdited.getName());
+                apPTxt.setText(userEdited.getLast_name_p());
+                apMTxt.setText(userEdited.getLast_name_m());
+                mailTxt.setText(userEdited.getDomicilio());
+                phoneTxt.setText(userEdited.getTelefono());
+            }
+        }
 
     }
 
@@ -193,8 +214,8 @@ public class UpUsers extends javax.swing.JPanel {
 
 
     private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
-        //! Lo hago así porque tengo dos clases que se llaman Users.
-        org.javierub.models.Users user = new org.javierub.models.Users();
+        Users user;
+        DAOUsersImpl dao = new DAOUsersImpl();
         String name = nameTxt.getText();
         String surname_daddy = apPTxt.getText();
         String surname_mommy = apMTxt.getText();
@@ -219,6 +240,11 @@ public class UpUsers extends javax.swing.JPanel {
             return;
         }
 
+        if(isEdition) {
+            user = userEdited;
+        } else {
+            user = new Users();
+        }
         user.setName(name);
         user.setLast_name_p(surname_daddy);
         user.setLast_name_m(surname_mommy);
@@ -226,10 +252,16 @@ public class UpUsers extends javax.swing.JPanel {
         user.setTelefono(phone);
 
         try{
-            DAOUsersImpl dao = new DAOUsersImpl();
-            dao.insert(user);
+            if(isEdition) {
+                dao.update(userEdited);
+                javax.swing.JOptionPane.showMessageDialog(this, "El usuario se actualizó correctamente.\n", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+                DashBoard.showJPanel(new org.javierub.views.Users());
+            }
 
-            javax.swing.JOptionPane.showMessageDialog(this, "El usuario se registró correctamente.\n", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+            if(!isEdition){
+                dao.insert(user);
+                javax.swing.JOptionPane.showMessageDialog(this, "El usuario se registró correctamente.\n", "AVISO", JOptionPane.INFORMATION_MESSAGE);
+            }
 
             nameTxt.setText("");
             apPTxt.setText("");
